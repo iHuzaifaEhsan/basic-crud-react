@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { baseURL, endPoints } from '../constants/url'
 
 const Posts = () => {
 
@@ -9,7 +10,7 @@ const Posts = () => {
   console.log(postData)
   const getPost = async () => {
     try {
-      const data = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=10", { method: "GET" })
+      const data = await fetch(`${baseURL}/${endPoints.posts}?_limit=10`, { method: "GET" })
       const result = await data.json()
       if (result) {
         setpostData(result)
@@ -21,7 +22,7 @@ const Posts = () => {
 
   const handleDelete = (id) => {
     try {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      fetch(`${baseURL}/${endPoints.posts}/${id}`, {
         method: "DELETE",
       })
     } catch (error) {

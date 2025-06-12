@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { baseURL, endPoints } from '../constants/url';
 
 const AddPost = () => {
 
@@ -16,7 +17,7 @@ const AddPost = () => {
     }
     if (window?.location?.pathname === '/add-post') {
       try {
-        fetch("https://jsonplaceholder.typicode.com/posts", {
+        fetch(`${baseURL}/${endPoints.posts}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -29,7 +30,7 @@ const AddPost = () => {
       }
     } else {
       try {
-        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        fetch(`${baseURL}/${endPoints.posts}/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": 'application/json'
@@ -45,7 +46,7 @@ const AddPost = () => {
 
   const getDataById = async () => {
     try {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {})
+      const res = await fetch(`${baseURL}/${endPoints.posts}/${id}`, {})
       const result = await res.json()
       setTitle(result?.title)
       setBody(result?.body)
